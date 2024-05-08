@@ -3,7 +3,7 @@
 import _throttle from 'lodash.throttle';
 
 // 3. Select the feedback form element and store it in variable formE1
-const formE1 = document.querySelector('.feedback-form');
+const formEl = document.querySelector('.feedback-form');
 
 // 4. Define a key for accessing local storage
 const LOCAL_STORAGE_KEY = 'feedback-form-state';
@@ -25,8 +25,8 @@ function loadForm() {
         }
 
         data = formLoad;
-        formE1.email.value = data.email || '';
-        formE1.message.value = data.message || '';
+        formEl.email.value = data.email || '';
+        formEl.message.value = data.message || '';
     } catch (error) {
         console.error('Error.message ', error.message);
     }
@@ -39,7 +39,7 @@ function loadForm() {
 function onSaveFormInput(event) {
     data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {};
 
-    data[event.targget.name] = event.target.value;
+    data[event.target.name] = event.target.value;
   // data = {
   // email: "mail@mail.com",
   // message: "message"
@@ -80,6 +80,6 @@ function onFormSubmit(event) {
 
 loadForm();
 
-formE1.addEventListener('input', _throttle(onSaveFormInput, 500));
+formEl.addEventListener('input', _throttle(onSaveFormInput, 500));
 
-formE1.addEventListener('submit', onFormSubmit);
+formEl.addEventListener('submit', onFormSubmit);
